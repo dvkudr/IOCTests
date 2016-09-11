@@ -14,7 +14,8 @@ namespace IOCAutoMapper
 
         public Consumer1()
         {
-            mapper = Extensions.Container.Resolve<AMFactory>().GenerateMapper<Consumer1>();
+            Console.WriteLine($"constructor {nameof(Consumer1)}");
+            mapper = Extensions.Container.Resolve<AutoMapperFactory>().GenerateMapper<Consumer1>();
         }
     }
 }

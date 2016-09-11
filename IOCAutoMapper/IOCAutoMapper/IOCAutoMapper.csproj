@@ -63,13 +63,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AMFactory.cs" />
+    <Compile Include="AutoMapperFactory.cs" />
     <Compile Include="Consumer1.cs" />
     <Compile Include="Consumer2.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Profile1.cs" />
     <Compile Include="Profile2.cs" />
-    <Compile Include="ProfileWrapper.cs" />
+    <Compile Include="AutoMapperProfileWrapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

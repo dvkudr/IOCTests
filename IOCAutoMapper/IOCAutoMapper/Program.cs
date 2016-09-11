@@ -14,16 +14,16 @@ namespace IOCAutoMapper
             var p1 = new Profile1();
             var p2 = new Profile2();
 
-            Extensions.Container.RegisterType<ProfileWrapper<Consumer1>>(
+            Extensions.Container.RegisterType<AutoMapperProfileWrapper<Consumer1>>(
                 nameof(p1), new ContainerControlledLifetimeManager(), new InjectionConstructor(p1));
 
-            Extensions.Container.RegisterType<ProfileWrapper<Consumer1>>(
+            Extensions.Container.RegisterType<AutoMapperProfileWrapper<Consumer1>>(
                 nameof(p2), new ContainerControlledLifetimeManager(), new InjectionConstructor(p2));
 
-            Extensions.Container.RegisterType<ProfileWrapper<Consumer2>>(
+            Extensions.Container.RegisterType<AutoMapperProfileWrapper<Consumer2>>(
                 nameof(p2), new ContainerControlledLifetimeManager(), new InjectionConstructor(p2));
 
-            Extensions.Container.RegisterType<AMFactory>(new ContainerControlledLifetimeManager());
+            Extensions.Container.RegisterType<AutoMapperFactory>(new ContainerControlledLifetimeManager());
 
             var c1 = new Consumer1();
             var c2 = new Consumer2();
