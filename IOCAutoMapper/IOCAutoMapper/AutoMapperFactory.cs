@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.Practices.Unity;
 
@@ -29,13 +26,13 @@ namespace IOCAutoMapper
 
             Console.WriteLine($"{nameof(AutoMapperFactory)}.{nameof(GenerateMapper)} for {consumerType.Name}");
 
-            var profiles = Extensions.Container.ResolveAll<AutoMapperProfileWrapper<T>>();
+            var profileContainer = Extensions.Container.Resolve<AutoMapperProfileContainer<T>>();
 
             var config = new MapperConfiguration(cfg =>
             {
-                foreach (var p in profiles)
+                foreach (var p in profileContainer.Profiles)
                 {
-                    cfg.AddProfile(p.Profile);
+                    cfg.AddProfile(p);
                 }
             });
 

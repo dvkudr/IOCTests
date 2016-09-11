@@ -69,7 +69,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Profile1.cs" />
     <Compile Include="Profile2.cs" />
-    <Compile Include="AutoMapperProfileWrapper.cs" />
+    <Compile Include="AutoMapperProfileContainer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
