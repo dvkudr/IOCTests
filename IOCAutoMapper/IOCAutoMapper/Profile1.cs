@@ -11,6 +11,7 @@ namespace IOCAutoMapper
     {
         public Profile1()
         {
+            Console.WriteLine(nameof(Profile1));
             //CreateMap<>();
         }
     }

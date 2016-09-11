@@ -10,9 +10,14 @@ namespace IOCAutoMapper
 {
     public class AMFactory
     {
-        public static IMapper GenerateMapper<T>()
+        public AMFactory()
         {
-            var profiles = Extensions.Container.ResolveAll<IProfileWrapper<T>>();
+            Console.WriteLine(nameof(AMFactory));
+        }
+
+        public IMapper GenerateMapper<T>()
+        {
+            var profiles = Extensions.Container.ResolveAll<ProfileWrapper<T>>();
 
             var config = new MapperConfiguration(cfg =>
             {

@@ -8,10 +8,11 @@ using AutoMapper;
 
 namespace IOCAutoMapper
 {
-    public class ProfileWrapper<T> : IProfileWrapper<T>
+    public class ProfileWrapper<T>
     {
         public ProfileWrapper(Profile profile)
         {
+            Console.WriteLine($"{nameof(ProfileWrapper<T>)} {profile.GetType().Name}");
             Profile = profile;
         }
         public Profile Profile { get; }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.Practices.Unity;
 
 namespace IOCAutoMapper
 {
@@ -13,7 +14,7 @@ namespace IOCAutoMapper
 
         public Consumer2()
         {
-            mapper = AMFactory.GenerateMapper<Consumer2>();
+            mapper = Extensions.Container.Resolve<AMFactory>().GenerateMapper<Consumer2>();
         }
     }
 }

@@ -67,7 +67,6 @@
     <Compile Include="Consumer1.cs" />
     <Compile Include="Consumer2.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="IProfileWrapper.cs" />
     <Compile Include="Profile1.cs" />
     <Compile Include="Profile2.cs" />
     <Compile Include="ProfileWrapper.cs" />
