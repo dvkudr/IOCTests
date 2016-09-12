@@ -27,7 +27,7 @@ namespace IOCAutoMapper
                     new Profile[] { Extensions.Container.Resolve<Profile2>() }
                 }));
 
-            Extensions.Container.RegisterType<AutoMapperFactory>(new ContainerControlledLifetimeManager());
+            Extensions.Container.RegisterType(typeof(AutoMapperFactory<>), new ContainerControlledLifetimeManager());
 
             var c1 = new Consumer1();
             var c2 = new Consumer2();

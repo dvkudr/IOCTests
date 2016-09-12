@@ -1,46 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
 using AutoMapper;
-using Microsoft.Practices.Unity;
 
 namespace IOCAutoMapper
 {
-    public class AutoMapperFactory
+    public class AutoMapperFactory<T>
     {
-        private readonly Dictionary<Type, IMapper> _mappers;
-        public AutoMapperFactory()
+        private readonly AutoMapperProfileContainer<T> _profileContainer;
+        private IMapper _mapper;
+        public AutoMapperFactory(AutoMapperProfileContainer<T> profileContainer)
         {
-            Console.WriteLine($"constructor {nameof(AutoMapperFactory)}");
-
-            _mappers = new Dictionary<Type, IMapper>();
+            Console.WriteLine($"constructor {nameof(AutoMapperFactory<T>)} for {typeof(T).Name}");
+            _profileContainer = profileContainer;
         }
 
-        public IMapper GenerateMapper<T>()
+        public IMapper GenerateMapper()
         {
-            var consumerType = typeof(T);
-            IMapper mapper;
-            if (_mappers.TryGetValue(consumerType, out mapper))
+            if (_mapper == null)
             {
-                return mapper;
+                var consumerType = typeof(T);
+                Console.WriteLine($"{nameof(AutoMapperFactory<T>)}.{nameof(GenerateMapper)} for {consumerType.Name}");
+
+                var config = new MapperConfiguration(cfg =>
+                {
+                    foreach (var p in _profileContainer.Profiles)
+                    {
+                        cfg.AddProfile(p);
+                    }
+                });
+
+                _mapper = config.CreateMapper();
             }
 
-            Console.WriteLine($"{nameof(AutoMapperFactory)}.{nameof(GenerateMapper)} for {consumerType.Name}");
-
-            var profileContainer = Extensions.Container.Resolve<AutoMapperProfileContainer<T>>();
-
-            var config = new MapperConfiguration(cfg =>
-            {
-                foreach (var p in profileContainer.Profiles)
-                {
-                    cfg.AddProfile(p);
-                }
-            });
-
-            mapper = config.CreateMapper();
-
-            _mappers.Add(consumerType, mapper);
-
-            return mapper;
+            return _mapper;
         }
     }
 }
