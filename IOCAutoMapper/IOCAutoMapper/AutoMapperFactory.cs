@@ -13,12 +13,12 @@ namespace IOCAutoMapper
             _profileContainer = profileContainer;
         }
 
-        public IMapper GenerateMapper()
+        public IMapper CreateMapper()
         {
             if (_mapper == null)
             {
                 var consumerType = typeof(T);
-                Console.WriteLine($"{nameof(AutoMapperFactory<T>)}.{nameof(GenerateMapper)} for {consumerType.Name}");
+                Console.WriteLine($"{nameof(AutoMapperFactory<T>)}.{nameof(CreateMapper)} for {consumerType.Name}");
 
                 var config = new MapperConfiguration(cfg =>
                 {

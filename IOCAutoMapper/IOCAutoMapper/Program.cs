@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Remoting.Messaging;
 using AutoMapper;
 using Microsoft.Practices.Unity;
 
@@ -12,20 +13,16 @@ namespace IOCAutoMapper
             Extensions.Container.RegisterType<Profile2>(new ContainerControlledLifetimeManager());
 
             Extensions.Container.RegisterType<AutoMapperProfileContainer<Consumer1>>(new ContainerControlledLifetimeManager(),
-                new InjectionConstructor(new object[]
-                {
+                new InjectionFactory(c => new AutoMapperProfileContainer<Consumer1>(
                     new Profile[]
                     {
-                        Extensions.Container.Resolve<Profile1>(),
-                        Extensions.Container.Resolve<Profile2>()
-                    }
-                }));
+                        c.Resolve<Profile1>(),
+                        c.Resolve<Profile2>()
+                    })));
 
             Extensions.Container.RegisterType<AutoMapperProfileContainer<Consumer2>>(new ContainerControlledLifetimeManager(),
-                new InjectionConstructor(new object[]
-                {
-                    new Profile[] { Extensions.Container.Resolve<Profile2>() }
-                }));
+                new InjectionFactory(c => new AutoMapperProfileContainer<Consumer2>(
+                    new Profile[] { c.Resolve<Profile2>() })));
 
             Extensions.Container.RegisterType(typeof(AutoMapperFactory<>), new ContainerControlledLifetimeManager());
 
