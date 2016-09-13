@@ -1,16 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using AutoMapper;
 
 namespace IOCAutoMapper
 {
     public class AutoMapperFactory<T> : IAutoMapperFactory<T>
     {
-        private readonly AutoMapperProfileContainer<T> _profileContainer;
+        private readonly IEnumerable<Profile> _profiles;
         private IMapper _mapper;
-        public AutoMapperFactory(AutoMapperProfileContainer<T> profileContainer)
+        public AutoMapperFactory(params Profile[] profiles)
         {
             Console.WriteLine($"constructor {nameof(AutoMapperFactory<T>)} for {typeof(T).Name}");
-            _profileContainer = profileContainer;
+            _profiles = new ReadOnlyCollection<Profile>(profiles);
         }
 
         public IMapper CreateMapper()
@@ -22,7 +24,7 @@ namespace IOCAutoMapper
 
                 var config = new MapperConfiguration(cfg =>
                 {
-                    foreach (var p in _profileContainer.Profiles)
+                    foreach (var p in _profiles)
                     {
                         cfg.AddProfile(p);
                     }
