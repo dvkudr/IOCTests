@@ -3,7 +3,7 @@ using AutoMapper;
 
 namespace IOCAutoMapper
 {
-    public class AutoMapperFactory<T>
+    public class AutoMapperFactory<T> : IAutoMapperFactory<T>
     {
         private readonly AutoMapperProfileContainer<T> _profileContainer;
         private IMapper _mapper;

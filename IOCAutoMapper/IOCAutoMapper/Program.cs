@@ -24,7 +24,7 @@ namespace IOCAutoMapper
                 new InjectionFactory(c => new AutoMapperProfileContainer<Consumer2>(
                     new Profile[] { c.Resolve<Profile2>() })));
 
-            Extensions.Container.RegisterType(typeof(AutoMapperFactory<>), new ContainerControlledLifetimeManager());
+            Extensions.Container.RegisterType(typeof(IAutoMapperFactory<>), typeof(AutoMapperFactory<>), new ContainerControlledLifetimeManager());
 
             var c1 = new Consumer1();
             var c2 = new Consumer2();
